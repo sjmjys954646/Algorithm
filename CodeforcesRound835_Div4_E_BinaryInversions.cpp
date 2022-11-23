@@ -1,22 +1,6 @@
 // freopen("input.txt", "r", stdin);
 #define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
-#include <stdio.h>
-#include <string>
-#include <cmath>
-#include <algorithm>
-#include <vector>
-#include <utility>
-#include <string>
-#include <queue>
-#include <stack>
-#include <cstring>
-#include <list>
-#include <set>
-#include <string.h>
-#include <map>
-#include <limits.h>
-#include <stdlib.h>
+#include <bits/stdc++.h>
 
 #define rep(i, n) for (int i = 0; i < (int)(n); ++i)
 #define rep1(i, n) for (int i = 1; i <= (int)(n); ++i)
@@ -35,7 +19,11 @@ typedef pair<int, int> pii;
 typedef vector<int> vi;
 
 const int INF = 987654321;
+
 int testcase;
+int N;
+int tmp;
+int prefix[200002] = { 0, };
 
 int main()
 {
@@ -45,21 +33,116 @@ int main()
 
 	cin >> testcase;
 
+
 	while (testcase--)
 	{
-		string tmp;
-		cin >> tmp;
-		int suma = 0;
-		int sumb = 0;
+		vi v;
+		int frontzero = -1;
+		int backone = -1;
+		ll ans = 0;
+		cin >> N;
 
-		suma = (int)tmp[0] + (int)tmp[1] + (int)tmp[2];
-		sumb = (int)tmp[3] + (int)tmp[4] + (int)tmp[5];
+		rep(i, N)
+		{
+			cin >> tmp;
+			v.push_back(tmp);
+			if (frontzero == -1 && tmp == 0)
+				frontzero = i;
+			if (tmp == 1)
+				backone = max(backone, i);
+		}
+		memset(prefix, 0, sizeof(prefix));
+		ll cur = 0;
+		ll sum = 0;
+		for(int i = N-1;i>=0;i--)
+		{
+			if (v[i] == 0)
+			{
+				cur += 1;
+				prefix[i] = cur;
+			}		
+			else
+			{
+				prefix[i] = cur;
+			}
+		}
 
-		if (suma == sumb)
-			cout << "YES\n";
-		else
-			cout << "NO\n";
+		/*for (int i = 0; i < N; i++)
+			cout << prefix[i] << " ";
+		cout << "\n";*/
+
+		for (int i = 0; i < N; i++)
+		{
+			if (v[i] == 1)
+			{
+				sum += prefix[i];
+			}
+		}
+		ans = max(ans, sum);
+		//cout << sum << "\n";
+
+		if (frontzero != -1)
+		{
+			memset(prefix, 0, sizeof(prefix));
+			v[frontzero] = 1;
+			cur = 0;
+			sum = 0;
+			for (int i = N - 1; i >= 0; i--)
+			{
+				if (v[i] == 0)
+				{
+					cur += 1;
+					prefix[i] = cur;
+				}
+				else
+				{
+					prefix[i] = cur;
+				}
+			}
+			for (int i = 0; i < N; i++)
+			{
+				if (v[i] == 1)
+				{
+					sum += prefix[i];
+				}
+			}
+			ans = max(ans, sum);
+			v[frontzero] = 0;
+			//cout << sum << "\n";
+		}
+
+		if (backone != -1)
+		{
+			memset(prefix, 0, sizeof(prefix));
+			v[backone] = 0;
+			cur = 0;
+			sum = 0;
+			for (int i = N - 1; i >= 0; i--)
+			{
+				if (v[i] == 0)
+				{
+					cur += 1;
+					prefix[i] = cur;
+				}
+				else
+				{
+					prefix[i] = cur;
+				}
+			}
+			for (int i = 0; i < N; i++)
+			{
+				if (v[i] == 1)
+				{
+					sum += prefix[i];
+				}
+			}
+			ans = max(ans, sum);
+			//cout << sum << "\n";
+
+		}
+		cout << ans << "\n";
 	}
+	
 
 	return 0;
 }
