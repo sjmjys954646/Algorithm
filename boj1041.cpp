@@ -1,0 +1,168 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <bits/stdc++.h>
+
+#define rep(i, n) for (int i = 0; i < (int)(n); ++i)
+#define rep1(i, n) for (int i = 1; i <= (int)(n); ++i)
+#define range(x) begin(x), end(x)
+#define sz(x) (int)(x).size()
+#define pb push_back
+#define F first
+#define S second
+
+using namespace std;
+
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+typedef pair<int, int> pii;
+typedef vector<int> vi;
+
+const int INF = 987654321;
+
+struct Point {
+	ll x, y;
+
+	bool operator < (const Point& a)
+	{
+		if (y == a.y)
+			return x < a.x;
+		else
+			return y < a.y;
+	}
+};
+
+ll ccw(const Point& a, const Point& b, const Point& c)
+{
+	return a.x * b.y + b.x * c.y + c.x * a.y - b.x * a.y - c.x * b.y - a.x * c.y;
+}
+
+ll dist(Point a, Point b)
+{
+	return (a.y - b.y) * (a.y - b.y) + (a.x - b.x) * (a.x - b.x);
+}
+
+
+int manhat(int startX, int startY, int endX, int endY)
+{
+	return abs(startX - endX) + abs(startY - endY);
+}
+
+int gcd(int x, int y)
+{
+	if (y == 0)
+		return x;
+	else
+		return gcd(y, x % y);
+}
+
+//
+//ll arr[1000002];
+//ll tree[4 * 1000002];
+//ll N, M, K;
+//ll order;
+//ll a, b, c, d;
+//
+//ll init(ll start, ll end, ll node)
+//{
+//	if (start == end)
+//		return tree[node] = arr[start];
+//
+//	ll mid = (start + end) / 2;
+//
+//	return tree[node] = init(start, mid, node * 2) + init(mid + 1, end, node * 2 + 1);
+//}
+//
+//ll query(ll start, ll end, ll node, ll left, ll right)
+//{
+//	if (left > end || right < start)
+//		return 0;
+//
+//	if (left <= start && end <= right)
+//		return tree[node];
+//
+//	ll mid = (start + end) / 2;
+//
+//	return query(start, mid, node * 2, left, right) + query(mid + 1, end, node * 2 + 1, left, right);
+//}
+//
+//ll update(ll start, ll end, ll node, ll index, ll diff)
+//{
+//	if (index < start || end < index)
+//		return tree[node];
+//
+//	if (start == end)
+//		return tree[node] = diff;;
+//
+//	ll mid = (start + end) / 2;
+//
+//	return tree[node] = update(start, mid, node * 2, index, diff) + update(mid + 1, end, node * 2 + 1, index, diff);
+//}
+
+int N;
+ll ans;
+vi v;
+int tmp;
+vi side1;
+vi side2;
+vi side3;
+
+int main()
+{
+	cin.tie(0);
+	ios_base::sync_with_stdio(false);
+	cout.tie(0);
+
+	cin >> N;
+	
+	rep(i, 6)
+	{
+		cin >> tmp;
+		v.push_back(tmp);
+	}
+
+	rep(i, 6)
+	{
+		side1.push_back(v[i]);
+	}
+	sort(side1.begin(), side1.end());
+
+	if (N == 1)
+	{
+		cout << side1[0] + side1[1] + side1[2] + side1[3] + side1[4];
+		return 0;
+	}
+
+	for(int i = 1;i <= 4;i++)
+	{
+		side2.push_back(v[0] + v[i]);
+		side2.push_back(v[5] + v[i]);
+	}
+	side2.push_back(v[1] + v[2]);
+	side2.push_back(v[2] + v[4]);
+	side2.push_back(v[4] + v[3]);
+	side2.push_back(v[3] + v[1]);
+
+	sort(side2.begin(), side2.end());
+
+	side3.push_back(v[0] + v[1] + v[2]);
+	side3.push_back(v[0] + v[2] + v[4]);
+	side3.push_back(v[0] + v[4] + v[3]);
+	side3.push_back(v[0] + v[3] + v[1]);
+	side3.push_back(v[5] + v[1] + v[2]);
+	side3.push_back(v[5] + v[2] + v[4]);
+	side3.push_back(v[5] + v[4] + v[3]);
+	side3.push_back(v[5] + v[3] + v[1]);
+
+	sort(side3.begin(), side3.end());
+
+	ans =  1LL*side1[0] * (N - 2) * (N - 1) * 4;
+	ans += 1LL * side1[0] * (N - 2) * (N - 2);
+	ans += 1LL * side2[0] * 4 * (N - 1);
+	ans += 1LL * side2[0] * 4 * (N - 2);
+	ans += 1LL * side3[0] * 4;
+	cout << ans;
+	
+
+	return 0;
+}
+
