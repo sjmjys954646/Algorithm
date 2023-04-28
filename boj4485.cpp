@@ -1,5 +1,5 @@
 //freopen("input.txt", "r", stdin);
-//2288kb 12ms
+//8940kb 112ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -47,66 +47,67 @@ int N;
 void dijkstra()
 {
 
-    priority_queue<pair<int, pii>> pq;
+   priority_queue<pair<int, pii>> pq;
 
-    pq.push({-dp[0][0], {0, 0}});
-    dist[0][0] = dp[0][0];
+   pq.push({-dp[0][0], {0, 0}});
+   dist[0][0] = dp[0][0];
 
-    while (!pq.empty())
-    {
-        int cost = -pq.top().F;
-        int curX = pq.top().S.F;
-        int curY = pq.top().S.S;
+   while (!pq.empty())
+   {
+      int cost = -pq.top().F;
+      int curX = pq.top().S.F;
+      int curY = pq.top().S.S;
 
-        pq.pop();
+      pq.pop();
 
-        if (curX == N - 1 && curY == N - 1)
-            break;
+      if (curX == N - 1 && curY == N - 1)
+         break;
 
-        for (int i = 0; i < 4; i++)
-        {
-            int nX = curX + dx[i];
-            int nY = curY + dy[i];
+      for (int i = 0; i < 4; i++)
+      {
+         int nX = curX + dx[i];
+         int nY = curY + dy[i];
 
-            if (nX < 0 || nY < 0 || nX >= N || nY >= N)
-                continue;
+         if (nX < 0 || nY < 0 || nX >= N || nY >= N)
+            continue;
 
-            if (dist[nY][nX] > dp[nY][nX] + cost)
-            {
-                dist[nY][nX] = dp[nY][nX] + cost;
-                pq.push({-dist[nY][nX], {nX, nY}});
-            }
-        }
-    }
+         if (dist[nY][nX] > dp[nY][nX] + cost)
+         {
+            dist[nY][nX] = dp[nY][nX] + cost;
+            pq.push({-dist[nY][nX], {nX, nY}});
+         }
+      }
+   }
 }
+
+//dp가 안되는 이유 : 불규칙적으로 왔다갔다 하는 구간이 생길때 예외가 생김
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-    int cnt = 1;
+   int cnt = 1;
 
-    while (true)
-    {
-        scanf("%d", &N);
+   while (true)
+   {
+      scanf("%d", &N);
 
-        if (N == 0)
-            break;
+      if (N == 0)
+         break;
 
-        memset(dp, 0, sizeof(dp));
+      memset(dp, 0, sizeof(dp));
 
-        rep(i, N)
-        {
-            rep(j, N)
-            {
-                scanf("%d", &dp[i][j]);
-                dist[i][j] = INF;
-            }
-        }
+      rep(i, N)
+      {
+         rep(j, N)
+         {
+            scanf("%d", &dp[i][j]);
+            dist[i][j] = INF;
+         }
+      }
 
-        dijkstra();
+      dijkstra();
 
-        printf("Problem %d: %d\n", cnt++, dist[N - 1][N - 1]);
-    }
+      printf("Problem %d: %d\n", cnt++, dist[N - 1][N - 1]);
+   }
 
-    return 0;
+   return 0;
 }

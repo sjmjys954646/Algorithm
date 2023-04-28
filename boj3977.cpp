@@ -37,121 +37,120 @@ const int INF = 987654321;
 
 int V, E;
 vector<int> arr[100002];
-bool finished[100002]; // sccê°€ ë§Œë“¤ì–´ë¬ëŠ”ì§€
+bool finished[100002]; // scc°¡ ¸¸µé¾î‰ç´ÂÁö
 stack<int> S;
 int num = 0;
 int sccN = 0;
-int visited[100002];     // ë°©ë¬¸ ë²ˆí˜¸
-vector<int> scc[100002]; //scc ëª©ë¡
-int sccM[100002];        // ì–´ëŠ scc groupì— ì†í•´ìˆëŠ”ì§€
+int visited[100002];     // ¹æ¹® ¹øÈ£
+vector<int> scc[100002]; //scc ¸ñ·Ï
+int sccM[100002];        // ¾î´À scc group¿¡ ¼ÓÇØÀÖ´ÂÁö
 int indegree[100002];
 
 int dfs(int start)
 {
-    visited[start] = ++num;
-    S.push(start);
-    int ret = visited[start];
+   visited[start] = ++num;
+   S.push(start);
+   int ret = visited[start];
 
-    for (int next : arr[start])
-    {
-        if (!visited[next])
-            ret = min(ret, dfs(next));
-        else if (!finished[next])
-            ret = min(ret, visited[next]);
-    }
+   for (int next : arr[start])
+   {
+      if (!visited[next])
+         ret = min(ret, dfs(next));
+      else if (!finished[next])
+         ret = min(ret, visited[next]);
+   }
 
-    if (ret == visited[start])
-    {
-        sccN++;
-        while (true)
-        {
-            int tmp = S.top();
-            S.pop();
-            sccM[tmp] = sccN;
-            finished[tmp] = true;
-            if (tmp == start)
-                break;
-        }
-    }
+   if (ret == visited[start])
+   {
+      sccN++;
+      while (true)
+      {
+         int tmp = S.top();
+         S.pop();
+         sccM[tmp] = sccN;
+         finished[tmp] = true;
+         if (tmp == start)
+            break;
+      }
+   }
 
-    return ret;
+   return ret;
 }
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
-    int testcase;
+   int testcase;
 
-    scanf("%d", &testcase);
+   scanf("%d", &testcase);
 
-    while (testcase--)
-    {
-        memset(finished, 0, sizeof(finished));
-        memset(visited, 0, sizeof(visited));
-        memset(indegree, 0, sizeof(indegree));
-        sccN = 0;
-        num = 0;
-        for (int i = 0; i < 100002; i++)
-        {
-            scc[i].clear();
-            arr[i].clear();
-        }
+   while (testcase--)
+   {
+      memset(finished, 0, sizeof(finished));
+      memset(visited, 0, sizeof(visited));
+      memset(indegree, 0, sizeof(indegree));
+      sccN = 0;
+      num = 0;
+      for (int i = 0; i < 100002; i++)
+      {
+         scc[i].clear();
+         arr[i].clear();
+      }
 
-        int A, B;
+      int A, B;
 
-        scanf("%d %d", &V, &E);
+      scanf("%d %d", &V, &E);
 
-        rep(i, E)
-        {
-            scanf("%d %d", &A, &B);
-            arr[A].pb(B);
-        }
+      rep(i, E)
+      {
+         scanf("%d %d", &A, &B);
+         arr[A].pb(B);
+      }
 
-        rep(i, V)
-        {
-            if (!visited[i])
-                dfs(i);
-        }
+      rep(i, V)
+      {
+         if (!visited[i])
+            dfs(i);
+      }
 
-        rep(i, V)
-        {
-            for (int j = 0; j < arr[i].size(); j++)
+      rep(i, V)
+      {
+         for (int j = 0; j < arr[i].size(); j++)
+         {
+            int nxt = arr[i][j];
+            if (sccM[i] != sccM[nxt])
             {
-                int nxt = arr[i][j];
-                if (sccM[i] != sccM[nxt])
-                {
-                    indegree[sccM[nxt]]++;
-                }
+               indegree[sccM[nxt]]++;
             }
-        }
+         }
+      }
 
-        int tmp;
-        int a = 0;
-        for (int i = 1; i <= sccN; i++)
-        {
-            if (!indegree[i])
-            {
-                tmp = i;
-                a++;
-            }
-        }
+      int tmp;
+      int a = 0;
+      for (int i = 1; i <= sccN; i++)
+      {
+         if (!indegree[i])
+         {
+            tmp = i;
+            a++;
+         }
+      }
 
-        if (a > 1)
-        {
-            cout << "Confused"
-                 << "\n";
-        }
-        else
-        {
-            rep(i, V)
-            {
-                if (sccM[i] == tmp)
-                    printf("%d\n", i);
-            }
-        }
-        cout << "\n";
-    }
+      if (a > 1)
+      {
+         cout << "Confused"
+              << "\n";
+      }
+      else
+      {
+         rep(i, V)
+         {
+            if (sccM[i] == tmp)
+               printf("%d\n", i);
+         }
+      }
+      cout << "\n";
+   }
 
-    return 0;
+   return 0;
 }

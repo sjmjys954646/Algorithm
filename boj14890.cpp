@@ -217,7 +217,6 @@ bool checkhor(int ver)
 
 int main()
 {
-   freopen("input.txt", "r", stdin);
 
    scanf("%d %d", &N, &L);
 

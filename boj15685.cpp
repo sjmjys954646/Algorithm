@@ -78,7 +78,6 @@ int solve()
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     cout << solve();
 

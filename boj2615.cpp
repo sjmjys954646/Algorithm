@@ -46,95 +46,94 @@ int dirY[4] = {0, 1, 1, 1};
 int dfs(int curX, int curY, int color, int dir, int depth)
 {
 
-    if (curX < 0 || curY < 0 || curX > 19 || curY > 19)
-        return depth - 1;
+   if (curX < 0 || curY < 0 || curX > 19 || curY > 19)
+      return depth - 1;
 
-    if (arr[curX][curY] != color)
-        return depth - 1;
+   if (arr[curX][curY] != color)
+      return depth - 1;
 
-    if (visited[curX][curY] == dir)
-        return depth - 1;
+   if (visited[curX][curY] == dir)
+      return depth - 1;
 
-    visited[curX][curY] = dir;
+   visited[curX][curY] = dir;
 
-    int nextX = curX + dirX[dir];
-    int nextY = curY + dirY[dir];
-    depth = dfs(nextX, nextY, color, dir, depth + 1);
+   int nextX = curX + dirX[dir];
+   int nextY = curY + dirY[dir];
+   depth = dfs(nextX, nextY, color, dir, depth + 1);
 
-    return depth;
+   return depth;
 }
 
 bool judge(int color)
 {
-    int result = 0;
+   int result = 0;
 
-    rep(j, 20)
-    {
-        rep(i, 20)
-        {
-            if (arr[i][j] != color)
-                continue;
+   rep(j, 20)
+   {
+      rep(i, 20)
+      {
+         if (arr[i][j] != color)
+            continue;
 
-            result = dfs(i, j, color, 0, 1);
-            if (result == 5)
-            {
-                ansX = j;
-                ansY = i;
-                return true;
-            }
-            result = dfs(i, j, color, 1, 1);
-            if (result == 5)
-            {
-                ansX = j;
-                ansY = i;
-                return true;
-            }
-            result = dfs(i, j, color, 2, 1);
-            if (result == 5)
-            {
-                ansX = j;
-                ansY = i;
-                return true;
-            }
-            result = dfs(i, j, color, 3, 1);
-            if (result == 5)
-            {
-                ansX = j;
-                ansY = i;
-                return true;
-            }
-        }
-    }
+         result = dfs(i, j, color, 0, 1);
+         if (result == 5)
+         {
+            ansX = j;
+            ansY = i;
+            return true;
+         }
+         result = dfs(i, j, color, 1, 1);
+         if (result == 5)
+         {
+            ansX = j;
+            ansY = i;
+            return true;
+         }
+         result = dfs(i, j, color, 2, 1);
+         if (result == 5)
+         {
+            ansX = j;
+            ansY = i;
+            return true;
+         }
+         result = dfs(i, j, color, 3, 1);
+         if (result == 5)
+         {
+            ansX = j;
+            ansY = i;
+            return true;
+         }
+      }
+   }
 
-    return false;
+   return false;
 }
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
-    memset(visited, -1, sizeof(visited));
+   memset(visited, -1, sizeof(visited));
 
-    rep(i, 19)
-    {
-        rep(j, 19)
-            scanf("%d", &arr[i][j]);
-    }
+   rep(i, 19)
+   {
+      rep(j, 19)
+          scanf("%d", &arr[i][j]);
+   }
 
-    if (judge(1))
-    {
-        printf("1\n");
-        printf("%d %d", ansY + 1, ansX + 1);
-    }
-    else if (judge(2))
-    {
-        printf("2\n");
-        printf("%d %d", ansY + 1, ansX + 1);
-    }
-    else
-    {
-        printf("0");
-    }
+   if (judge(1))
+   {
+      printf("1\n");
+      printf("%d %d", ansY + 1, ansX + 1);
+   }
+   else if (judge(2))
+   {
+      printf("2\n");
+      printf("%d %d", ansY + 1, ansX + 1);
+   }
+   else
+   {
+      printf("0");
+   }
 
-    return 0;
+   return 0;
 }

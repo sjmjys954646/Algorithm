@@ -36,65 +36,50 @@ typedef vector<int> vi;
 
 const int INF = 987654321;
 
-//https://jason9319.tistory.com/153
+int N;
+ll arr[500002];
+ll tarr[500002];
 
-ll N, M, K;
-ll seg[4000002];
-
-ll update(ll pos, ll val, ll node, ll x, ll y)
+ll mergesort(int start, int end)
 {
-    if (pos < x || y < pos)
-        return seg[node];
-    if (x == y)
-        return seg[node] = seg[node] += 1;
+   if (start == end)
+      return 0;
 
-    ll mid = (x + y) / 2;
+   int mid = (start + end) / 2;
 
-    return seg[node] = update(pos, val, node * 2, x, mid) + update(pos, val, node * 2 + 1, mid + 1, y);
-}
+   ll ret = mergesort(start, mid) + mergesort(mid + 1, end);
 
-ll query(ll lo, ll hi, ll node, ll x, ll y)
-{
-    if (y < lo || hi < x)
-        return 0;
-    if (lo <= x && y <= hi)
-        return seg[node];
+   int l = start;
+   int r = mid + 1;
+   int idx = 0;
 
-    ll mid = (x + y) / 2;
+   while (l <= mid || r <= end)
+   {
+      if (l <= mid && (r > end || arr[l] <= arr[r]))
+         tarr[idx++] = arr[l++];
+      else
+      {
+         ret += (mid - l + 1) * 1LL;
+         tarr[idx++] = arr[r++];
+      }
+   }
+   for (int i = start; i <= end; i++)
+      arr[i] = tarr[i - start];
 
-    return query(lo, hi, node * 2, x, mid) + query(lo, hi, node * 2 + 1, mid + 1, y);
+   return ret;
 }
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
-    ll tmp, a, b, c;
-    tmp = 0;
+   scanf("%d", &N);
 
-    vector<ll> arr;
-    vector<ll> larr;
+   rep(i, N)
+       scanf("%d", &arr[i]);
 
-    scanf("%lld", &N);
+   ll result = mergesort(0, N - 1);
 
-    rep(i, N)
-    {
-        scanf("%lld", &a);
-        larr.push_back(a);
-        arr.push_back(a);
-    }
+   printf("%lld", result);
 
-    sort(arr.begin(), arr.end());
-    arr.erase(unique(arr.begin(), arr.end()), arr.end());
-
-    rep1(i, N)
-    {
-        a = lower_bound(arr.begin(), arr.end(), larr[i - 1]) - arr.begin() + 1;
-        tmp += (ll)(a - 1 - query(1, a - 1, 1, 1, N));
-        update(a, 0, 1, 1, N);
-    }
-
-    printf("%lld", tmp);
-
-    return 0;
+   return 0;
 }

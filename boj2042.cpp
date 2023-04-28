@@ -41,49 +41,48 @@ ll seg[4000002];
 
 ll update(ll pos, ll val, ll node, ll x, ll y)
 {
-    if (pos < x || y < pos)
-        return seg[node];
-    if (x == y)
-        return seg[node] = val;
+   if (pos < x || y < pos)
+      return seg[node];
+   if (x == y)
+      return seg[node] = val;
 
-    ll mid = (x + y) / 2;
+   ll mid = (x + y) / 2;
 
-    return seg[node] = update(pos, val, node * 2, x, mid) + update(pos, val, node * 2 + 1, mid + 1, y);
+   return seg[node] = update(pos, val, node * 2, x, mid) + update(pos, val, node * 2 + 1, mid + 1, y);
 }
 
 ll query(ll lo, ll hi, ll node, ll x, ll y)
 {
-    if (y < lo || hi < x)
-        return 0;
-    if (lo <= x && y <= hi)
-        return seg[node];
+   if (y < lo || hi < x)
+      return 0;
+   if (lo <= x && y <= hi)
+      return seg[node];
 
-    ll mid = (x + y) / 2;
+   ll mid = (x + y) / 2;
 
-    return query(lo, hi, node * 2, x, mid) + query(lo, hi, node * 2 + 1, mid + 1, y);
+   return query(lo, hi, node * 2, x, mid) + query(lo, hi, node * 2 + 1, mid + 1, y);
 }
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-    ll tmp, a, b, c;
+   ll tmp, a, b, c;
 
-    scanf("%lld %lld %lld", &N, &M, &K);
+   scanf("%lld %lld %lld", &N, &M, &K);
 
-    for (int i = 1; i <= N; i++)
-    {
-        scanf("%lld", &tmp);
-        update(i, tmp, 1, 1, N);
-    }
+   for (int i = 1; i <= N; i++)
+   {
+      scanf("%lld", &tmp);
+      update(i, tmp, 1, 1, N);
+   }
 
-    rep(i, M + K)
-    {
-        scanf("%lld %lld %lld", &a, &b, &c);
-        if (a == 1)
-            update(b, c, 1, 1, N);
-        else
-            printf("%lld\n", query(b, c, 1, 1, N));
-    }
+   rep(i, M + K)
+   {
+      scanf("%lld %lld %lld", &a, &b, &c);
+      if (a == 1)
+         update(b, c, 1, 1, N);
+      else
+         printf("%lld\n", query(b, c, 1, 1, N));
+   }
 
-    return 0;
+   return 0;
 }

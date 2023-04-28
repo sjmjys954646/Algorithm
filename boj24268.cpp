@@ -1,4 +1,4 @@
-﻿// freopen("input.txt", "r", stdin);
+// freopen("input.txt", "r", stdin);
 #define _CRT_SECURE_NO_WARNINGS
 #include <bits/stdc++.h>
 
@@ -81,6 +81,8 @@ void select(int index, int fin)
 
     }
 }
+
+
 
 
 int main()

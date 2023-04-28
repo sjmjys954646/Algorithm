@@ -3,19 +3,6 @@
 
 using namespace std;
 
-/*
-https://kibbomi.tistory.com/140
-구현에 백트래킹 적용 문제인데 계속 틀려서 그냥 답지봄
-
-<개선안>
-
-1. 백트래킹 같은 경우는 전역변수를 이용한 초기화는 자제
-
-2. 문제에 주어진 데이터를 더 유연하게 자료화
-
-3. 1번과 매한가지인데 매개변수 함수 전달을 잘 활용
-
-*/
 
 struct FISH
 {
@@ -47,9 +34,7 @@ int dfs(int origin_map[][4], int y, int x, int dir, FISH origin_fish[17])
     FISH fish[17];
     cpmap(map, origin_map);
     cpfish(fish, origin_fish);
-    //상어 y,x에 놓을것
     int eat = map[y][x];
-    //여기서 dir결정
     dir = fish[map[y][x]].dir;
 
     fish[map[y][x]].x = -1;
@@ -60,7 +45,6 @@ int dfs(int origin_map[][4], int y, int x, int dir, FISH origin_fish[17])
 
     int ans = 0;
 
-    //물고기 이동
     for (int i = 1; i <= 16; ++i)
     {
         if (fish[i].isdead == false)
@@ -72,13 +56,11 @@ int dfs(int origin_map[][4], int y, int x, int dir, FISH origin_fish[17])
                 int cx = fish[i].x + dx[fish[i].dir];
                 int cy = fish[i].y + dy[fish[i].dir];
 
-                //상어면 방향바꾸기 1 ~ 8이지
                 if (cx == x && cy == y)
                 {
                     fish[i].dir = (fish[i].dir + 1) % 8;
                     continue;
                 }
-                //경계밖이면 방향바꾸기
                 if (cx < 0 || cy < 0 || cx >= 4 || cy >= 4)
                 {
                     fish[i].dir = (fish[i].dir + 1) % 8;
@@ -90,7 +72,6 @@ int dfs(int origin_map[][4], int y, int x, int dir, FISH origin_fish[17])
                 break;
             }
 
-            //next위치의 물고기와 자리 바꾸기
             if (map[ny][nx] == 0)
             {
                 map[fish[i].y][fish[i].x] = 0;
@@ -129,7 +110,6 @@ int dfs(int origin_map[][4], int y, int x, int dir, FISH origin_fish[17])
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
     int map[4][4] = {0};
     FISH fish[17];
     for (int i = 0; i < 4; ++i)

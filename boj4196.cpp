@@ -46,64 +46,63 @@ int ans = 0;
 
 void dfs(int start)
 {
-    visited[start] = true;
-    for (int i = 0; i < arr[start].size(); i++)
-    {
-        if (visited[arr[start][i]] == false)
-        {
-            dfs(arr[start][i]);
-        }
-    }
-    finish[start] = true;
-    s.push(start);
+   visited[start] = true;
+   for (int i = 0; i < arr[start].size(); i++)
+   {
+      if (visited[arr[start][i]] == false)
+      {
+         dfs(arr[start][i]);
+      }
+   }
+   finish[start] = true;
+   s.push(start);
 }
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
-    int testcase;
-    scanf("%d", &testcase);
+   int testcase;
+   scanf("%d", &testcase);
 
-    while (testcase--)
-    {
-        while (!s.empty())
-            s.pop();
-        memset(visited, 0, sizeof(visited));
-        for (int i = 0; i < 100002; i++)
-            arr[i].clear();
-        ans = 0;
+   while (testcase--)
+   {
+      while (!s.empty())
+         s.pop();
+      memset(visited, 0, sizeof(visited));
+      for (int i = 0; i < 100002; i++)
+         arr[i].clear();
+      ans = 0;
 
-        int A, B;
+      int A, B;
 
-        scanf("%d %d", &n, &m);
+      scanf("%d %d", &n, &m);
 
-        rep(i, m)
-        {
-            scanf("%d %d", &A, &B);
-            arr[A].pb(B);
-        }
+      rep(i, m)
+      {
+         scanf("%d %d", &A, &B);
+         arr[A].pb(B);
+      }
 
-        rep1(i, n)
-        {
-            if (!visited[i])
-                dfs(i);
-        }
+      rep1(i, n)
+      {
+         if (!visited[i])
+            dfs(i);
+      }
 
-        memset(visited, 0, sizeof(visited));
-        while (!s.empty())
-        {
-            int t = s.top();
-            s.pop();
-            if (!visited[t])
-            {
-                dfs(t);
-                ans++;
-            }
-        }
+      memset(visited, 0, sizeof(visited));
+      while (!s.empty())
+      {
+         int t = s.top();
+         s.pop();
+         if (!visited[t])
+         {
+            dfs(t);
+            ans++;
+         }
+      }
 
-        printf("%d\n", ans);
-    }
+      printf("%d\n", ans);
+   }
 
-    return 0;
+   return 0;
 }

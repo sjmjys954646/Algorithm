@@ -1,4 +1,3 @@
-﻿//2020kb 0ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -18,8 +17,6 @@ using namespace std;
 
 deque<int> dq[4];
 int tdir[4];
-// 첨에 구현하려한게 dq말고 기본 배열 arr[4][8]에 pointer[4] dir[4]
-// 이렇게 있는데 pointer-2 pointer+2로 톱니 왼쪽 오른쪽을 비교하는 방식이었음 근데 왜안되지
 
 int main()
 {

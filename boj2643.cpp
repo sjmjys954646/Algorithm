@@ -1,95 +1,34 @@
-//freopen("input.txt", "r", stdin);
-#define _CRT_SECURE_NO_WARNINGS
-#include <iostream>
-#include <stdio.h>
-#include <string>
-#include <cmath>
-#include <algorithm>
-#include <vector>
-#include <utility>
-#include <string>
-#include <queue>
-#include <stack>
+#include <cstdio>
 #include <cstring>
-#include <list>
-#include <set>
-#include <string.h>
-#include <map>
-#include <limits.h>
-#include <stdlib.h>
-
-#define rep(i, n) for (int i = 0; i < (int)(n); ++i)
-#define rep1(i, n) for (int i = 1; i <= (int)(n); ++i)
-#define range(x) begin(x), end(x)
-#define sz(x) (int)(x).size()
-#define pb push_back
-#define F first
-#define S second
-
+#include <algorithm>
 using namespace std;
-
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double ld;
-typedef pair<int, int> pii;
-typedef vector<int> vi;
-
-const int INF = 987654321;
-
-int N;
-int cache[103];
-vector<pair<int, int>> v;
-
-/*
-3
-100 1
-2 2
-2 2
-*/
-
-int dp(int index)
-{
-    int &ret = cache[index];
-
-    if (ret != -1)
-        return ret;
-
+struct P{
+    int u,v;
+};
+int N,dp[101];
+P a[101];
+bool cmp(P& a,P& b){
+    if(a.u > b.u) return 1;
+    else if(a.u==b.u) return a.v > b.v;
+    return 0;
+}
+int sol(int n){
+    int& ret = dp[n];
+    if(ret!=-1) return ret;
     ret = 0;
-
-    for (int i = index + 1; i < N; i++)
-    {
-        if (v[index].S >= v[i].S)
-            ret = max(ret, dp(i));
-    }
-
+    for(int i=n+1;i<=N;i++) if(a[i].v <= a[n].v) ret = max(ret,sol(i));
     return ret += 1;
 }
-
-int main()
-{
-    freopen("input.txt", "r", stdin);
-
-    int a, b;
-
-    scanf("%d", &N);
-
-    rep(i, N)
-    {
-        scanf("%d %d", &a, &b);
-        v.pb({max(a, b), min(a, b)});
+int main(){
+    scanf("%d",&N);
+    for(int i=1;i<=N;i++){
+        int u,v;
+        scanf("%d%d",&u,&v);
+        if(u<v) swap(u,v);
+        a[i].u=u, a[i].v=v;
     }
-
-    sort(v.begin(), v.end(), greater<pair<int, int>>());
-
-    int ans = -1;
-
-    rep(i, N)
-    {
-        memset(cache, -1, sizeof(cache));
-        ans = max(ans, dp(i));
-    }
-
-    printf("%d", ans);
-
-    return 0;
+    a[0].u=a[0].v=9e8;
+    sort(a,a+N+1,cmp);
+    memset(dp,-1,sizeof(dp));
+    printf("%d",sol(0)-1);
 }

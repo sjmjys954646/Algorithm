@@ -1,4 +1,4 @@
-//2480kb 520ms
+//6132kb 84ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -151,8 +151,6 @@ void happen()
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-
     scanf("%d %d %d", &N, &M, &K);
 
     rep(i, M)

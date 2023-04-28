@@ -38,35 +38,35 @@ const int INF = 987654321;
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+   ios::sync_with_stdio(false);
+   cin.tie(NULL);
+   cout.tie(NULL);
 
-    int N;
+   int N;
 
-    cin >> N;
-    long long dir = 1000000000;
-    int round = 1;
+   cin >> N;
+   long long dir = 1000000000;
+   int round = 1;
 
-    rep(i, N)
-    {
-        int a, b, c;
-        cin >> a >> b >> c;
+   rep(i, N)
+   {
+      int a, b, c;
+      cin >> a >> b >> c;
 
-        dir /= a;
-        dir *= b;
-        if (c == 0)
-            round *= 1;
-        else
-            round *= -1;
-    }
+      dir /= a;
+      dir *= b;
+      if (c == 0)
+         round *= 1;
+      else
+         round *= -1;
+   }
 
-    if (round == 1)
-        round = 0;
-    else
-        round = 1;
+   if (round == 1)
+      round = 0;
+   else
+      round = 1;
 
-    cout << round << " " << dir / 1000000000;
+   cout << round << " " << dir / 1000000000;
 
-    return 0;
+   return 0;
 }

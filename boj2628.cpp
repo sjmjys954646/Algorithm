@@ -38,52 +38,51 @@ const int INF = 987654321;
 
 int x, y;
 int N;
-vi ycut; //ÏÑ∏Î°úÎ°úÏûêÎ¶Ñ
-vi xcut; // Í∞ÄÎ°úÎ°úÏûêÎ¶Ñ
+vi ycut; //ºº∑Œ∑Œ¿⁄∏ß
+vi xcut; // ∞°∑Œ∑Œ¿⁄∏ß
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
-    int a, b;
-    int xcutF = 0, xcutB = 0, ycutF = 0, ycutB = 0;
+   int a, b;
+   int xcutF = 0, xcutB = 0, ycutF = 0, ycutB = 0;
 
-    scanf("%d %d", &x, &y);
+   scanf("%d %d", &x, &y);
 
-    scanf("%d", &N);
+   scanf("%d", &N);
 
-    rep(i, N)
-    {
-        scanf("%d %d", &a, &b);
-        if (a == 0)
-            xcut.pb(b);
-        else
-            ycut.pb(b);
-    }
+   rep(i, N)
+   {
+      scanf("%d %d", &a, &b);
+      if (a == 0)
+         xcut.pb(b);
+      else
+         ycut.pb(b);
+   }
 
-    xcut.pb(0);
-    xcut.pb(y);
-    ycut.pb(0);
-    ycut.pb(x);
+   xcut.pb(0);
+   xcut.pb(y);
+   ycut.pb(0);
+   ycut.pb(x);
 
-    sort(xcut.begin(), xcut.end());
-    sort(ycut.begin(), ycut.end());
+   sort(xcut.begin(), xcut.end());
+   sort(ycut.begin(), ycut.end());
 
-    vi sq;
+   vi sq;
 
-    for (int i = 0; i < xcut.size() - 1; i++)
-    {
-        int column = xcut[i + 1] - xcut[i];
-        for (int j = 0; j < ycut.size() - 1; j++)
-        {
-            int row = ycut[j + 1] - ycut[j];
-            sq.pb(row * column);
-        }
-    }
+   for (int i = 0; i < xcut.size() - 1; i++)
+   {
+      int column = xcut[i + 1] - xcut[i];
+      for (int j = 0; j < ycut.size() - 1; j++)
+      {
+         int row = ycut[j + 1] - ycut[j];
+         sq.pb(row * column);
+      }
+   }
 
-    sort(sq.begin(), sq.end());
+   sort(sq.begin(), sq.end());
 
-    printf("%d", sq[sq.size() - 1]);
+   printf("%d", sq[sq.size() - 1]);
 
-    return 0;
+   return 0;
 }

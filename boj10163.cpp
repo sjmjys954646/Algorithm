@@ -41,49 +41,49 @@ int num[200];
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+   ios::sync_with_stdio(false);
+   cin.tie(NULL);
+   cout.tie(NULL);
 
-    int N;
+   int N;
 
-    cin >> N;
+   cin >> N;
 
-    memset(arr, sizeof(arr), 0);
+   memset(arr, sizeof(arr), 0);
 
-    rep1(t, N)
-    {
-        int a, b, row, column;
+   rep1(t, N)
+   {
+      int a, b, row, column;
 
-        cin >> a >> b >> row >> column;
+      cin >> a >> b >> row >> column;
 
-        rep(i, column)
-        {
-            rep(j, row)
-            {
-                arr[b + i][a + j] = t;
-            }
-        }
-    }
+      rep(i, column)
+      {
+         rep(j, row)
+         {
+            arr[b + i][a + j] = t;
+         }
+      }
+   }
 
-    rep1(t, N)
-    {
-        int sum = 0;
-        rep(i, 1001)
-        {
-            rep(j, 1001)
-            {
-                if (arr[i][j] == t)
-                    sum++;
-            }
-        }
-        num[t] = sum;
-    }
+   rep1(t, N)
+   {
+      int sum = 0;
+      rep(i, 1001)
+      {
+         rep(j, 1001)
+         {
+            if (arr[i][j] == t)
+               sum++;
+         }
+      }
+      num[t] = sum;
+   }
 
-    rep1(t, N)
-    {
-        cout << num[t] << "\n";
-    }
+   rep1(t, N)
+   {
+      cout << num[t] << "\n";
+   }
 
-    return 0;
+   return 0;
 }

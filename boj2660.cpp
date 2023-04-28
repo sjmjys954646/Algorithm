@@ -45,78 +45,77 @@ int visited[52];
 
 void bfs(int start)
 {
-    queue<pair<int, int>> q;
-    q.push({start, 1});
-    visited[start] = 1;
+   queue<pair<int, int>> q;
+   q.push({start, 1});
+   visited[start] = 1;
 
-    while (!q.empty())
-    {
-        int des = q.front().F;
-        int cost = q.front().S;
-        q.pop();
+   while (!q.empty())
+   {
+      int des = q.front().F;
+      int cost = q.front().S;
+      q.pop();
 
-        for (int i = 0; i < graph[des].size(); i++)
-        {
-            int next = graph[des][i];
-            if (!visited[next])
-            {
+      for (int i = 0; i < graph[des].size(); i++)
+      {
+         int next = graph[des][i];
+         if (!visited[next])
+         {
 
-                visited[next] = cost + 1;
-                q.push({next, cost + 1});
-            }
-        }
-    }
+            visited[next] = cost + 1;
+            q.push({next, cost + 1});
+         }
+      }
+   }
 }
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
-    scanf("%d", &N);
+   scanf("%d", &N);
 
-    rep1(i, N)
-    {
-        arr[i] = INF;
-    }
+   rep1(i, N)
+   {
+      arr[i] = INF;
+   }
 
-    while (true)
-    {
-        scanf("%d %d", &A, &B);
-        if (A == -1 && B == -1)
-            break;
+   while (true)
+   {
+      scanf("%d %d", &A, &B);
+      if (A == -1 && B == -1)
+         break;
 
-        graph[A].push_back(B);
-        graph[B].push_back(A);
-    }
+      graph[A].push_back(B);
+      graph[B].push_back(A);
+   }
 
-    rep1(i, N)
-    {
-        memset(visited, 0, sizeof(visited));
-        bfs(i);
-        int m = -1;
-        rep1(i, N)
-        {
-            m = max(visited[i], m);
-        }
-        arr[i] = m;
-    }
+   rep1(i, N)
+   {
+      memset(visited, 0, sizeof(visited));
+      bfs(i);
+      int m = -1;
+      rep1(i, N)
+      {
+         m = max(visited[i], m);
+      }
+      arr[i] = m;
+   }
 
-    int mini = INF;
-    rep1(i, N)
-    {
-        mini = min(mini, arr[i]);
-    }
-    rep1(i, N)
-    {
-        if (arr[i] == mini)
-            ans.push_back(i);
-    }
-    sort(ans.begin(), ans.end());
+   int mini = INF;
+   rep1(i, N)
+   {
+      mini = min(mini, arr[i]);
+   }
+   rep1(i, N)
+   {
+      if (arr[i] == mini)
+         ans.push_back(i);
+   }
+   sort(ans.begin(), ans.end());
 
-    printf("%d %d\n", mini - 1, ans.size());
-    rep(i, ans.size())
-    {
-        printf("%d ", ans[i]);
-    }
-    return 0;
+   printf("%d %d\n", mini - 1, ans.size());
+   rep(i, ans.size())
+   {
+      printf("%d ", ans[i]);
+   }
+   return 0;
 }

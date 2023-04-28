@@ -131,7 +131,6 @@ void circulation()
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     scanf("%d %d %d", &R, &C, &T);
 
@@ -167,7 +166,6 @@ int main()
 
     printf("%d", total);
 
-    //Debug
     // rep(i, R)
     // {
     //     rep(j, C)

@@ -38,29 +38,29 @@ const int INF = 987654321;
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+   ios::sync_with_stdio(false);
+   cin.tie(NULL);
+   cout.tie(NULL);
 
-    int N;
+   int N;
 
-    cin >> N;
+   cin >> N;
 
-    int arr[3] = {300, 60, 10};
-    int arrNum[3] = {
-        0,
-    };
+   int arr[3] = {300, 60, 10};
+   int arrNum[3] = {
+       0,
+   };
 
-    rep(i, 3)
-    {
-        arrNum[i] += N / arr[i];
-        N %= arr[i];
-    }
+   rep(i, 3)
+   {
+      arrNum[i] += N / arr[i];
+      N %= arr[i];
+   }
 
-    if (N != 0)
-        cout << -1;
-    else
-        cout << arrNum[0] << " " << arrNum[1] << " " << arrNum[2];
+   if (N != 0)
+      cout << -1;
+   else
+      cout << arrNum[0] << " " << arrNum[1] << " " << arrNum[2];
 
-    return 0;
+   return 0;
 }

@@ -45,71 +45,70 @@ int converter[5] = {0, 3, 4, 1, 2};
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
-    int tmp;
+   int tmp;
 
-    scanf("%d", &len);
+   scanf("%d", &len);
 
-    rep(i, len)
-    {
-        cin >> tmp;
-        standard += (tmp + '0');
-    }
+   rep(i, len)
+   {
+      cin >> tmp;
+      standard += (tmp + '0');
+   }
 
-    scanf("%d", &N);
+   scanf("%d", &N);
 
-    rep(j, N)
-    {
-        rep(i, len)
-        {
-            cin >> tmp;
-            hubo[j] += (tmp + '0');
-        }
-    }
+   rep(j, N)
+   {
+      rep(i, len)
+      {
+         cin >> tmp;
+         hubo[j] += (tmp + '0');
+      }
+   }
 
-    pos.push_back(standard);
-    rep(i, len - 1)
-    {
-        string t = pos[i].substr(1, len - 1);
-        t.push_back(pos[i].front());
-        pos.push_back(t);
-    }
+   pos.push_back(standard);
+   rep(i, len - 1)
+   {
+      string t = pos[i].substr(1, len - 1);
+      t.push_back(pos[i].front());
+      pos.push_back(t);
+   }
 
-    string tmps;
-    rep(i, len)
-    {
-        tmps += (converter[(standard[len - i - 1] - '0')] + '0');
-    }
+   string tmps;
+   rep(i, len)
+   {
+      tmps += (converter[(standard[len - i - 1] - '0')] + '0');
+   }
 
-    pos.push_back(tmps);
-    for (int i = len; i < len * 2; i++)
-    {
-        string t = pos[i].substr(1, len - 1);
-        t.push_back(pos[i].front());
-        pos.push_back(t);
-    }
+   pos.push_back(tmps);
+   for (int i = len; i < len * 2; i++)
+   {
+      string t = pos[i].substr(1, len - 1);
+      t.push_back(pos[i].front());
+      pos.push_back(t);
+   }
 
-    int ans = 0;
-    vector<int> vans;
-    rep(i, N)
-    {
-        if (find(pos.begin(), pos.end(), hubo[i]) != pos.end())
-        {
-            ans++;
-            vans.pb(i);
-        }
-    }
+   int ans = 0;
+   vector<int> vans;
+   rep(i, N)
+   {
+      if (find(pos.begin(), pos.end(), hubo[i]) != pos.end())
+      {
+         ans++;
+         vans.pb(i);
+      }
+   }
 
-    cout << ans << "\n";
-    rep(i, ans)
-    {
-        rep(j, len)
-        {
-            cout << hubo[vans[i]][j] << " ";
-        }
-        cout << "\n";
-    }
+   cout << ans << "\n";
+   rep(i, ans)
+   {
+      rep(j, len)
+      {
+         cout << hubo[vans[i]][j] << " ";
+      }
+      cout << "\n";
+   }
 
-    return 0;
+   return 0;
 }

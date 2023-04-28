@@ -1,5 +1,5 @@
 //freopen("input.txt", "r", stdin);
-//8940kb 112ms
+//2096kb 4ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -140,7 +140,6 @@ int bfs(int startY, int startX)
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     int testcase;
     int startPointX, startPointY;

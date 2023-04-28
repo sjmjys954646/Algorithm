@@ -1,4 +1,3 @@
-#메모리 : 29076 KB 시간 : 76ms
 T = int(input())
 main = input()
 mainlen = len(main)

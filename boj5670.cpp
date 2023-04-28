@@ -92,7 +92,6 @@ char a[100001][82];
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     while (scanf("%d", &n) != EOF)
     {

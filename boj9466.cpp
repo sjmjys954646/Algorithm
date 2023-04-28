@@ -43,57 +43,56 @@ int ans;
 
 void dfs(int start)
 {
-    visited[start] = true;
+   visited[start] = true;
 
-    int nt = graph[start];
+   int nt = graph[start];
 
-    if (!visited[nt])
-        dfs(nt);
-    else if (!fin[nt])
-    {
-        for (int i = nt; i != start; i = graph[i])
-        {
-            ans++;
-        }
-        ans++;
-    }
-    fin[start] = true;
+   if (!visited[nt])
+      dfs(nt);
+   else if (!fin[nt])
+   {
+      for (int i = nt; i != start; i = graph[i])
+      {
+         ans++;
+      }
+      ans++;
+   }
+   fin[start] = true;
 }
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-    int testcase;
+   int testcase;
 
-    scanf("%d", &testcase);
+   scanf("%d", &testcase);
 
-    while (testcase--)
-    {
-        int N;
-        ans = 0;
-        memset(graph, 0, sizeof(graph));
-        memset(visited, 0, sizeof(visited));
-        memset(fin, 0, sizeof(fin));
+   while (testcase--)
+   {
+      int N;
+      ans = 0;
+      memset(graph, 0, sizeof(graph));
+      memset(visited, 0, sizeof(visited));
+      memset(fin, 0, sizeof(fin));
 
-        scanf("%d", &N);
+      scanf("%d", &N);
 
-        rep(i, N)
-        {
-            int tmp;
-            scanf("%d", &tmp);
-            graph[i] = tmp - 1;
-        }
+      rep(i, N)
+      {
+         int tmp;
+         scanf("%d", &tmp);
+         graph[i] = tmp - 1;
+      }
 
-        rep(i, N)
-        {
-            if (!visited[i])
-            {
-                dfs(i);
-            }
-        }
+      rep(i, N)
+      {
+         if (!visited[i])
+         {
+            dfs(i);
+         }
+      }
 
-        printf("%d\n", N - ans);
-    }
+      printf("%d\n", N - ans);
+   }
 
-    return 0;
+   return 0;
 }

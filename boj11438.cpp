@@ -43,7 +43,6 @@ void getTree(int here, int par)
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     memset(depth, 0, sizeof(depth));
 

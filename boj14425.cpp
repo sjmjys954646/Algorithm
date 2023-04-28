@@ -92,7 +92,6 @@ struct Trie
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     Trie *root = new Trie();
 

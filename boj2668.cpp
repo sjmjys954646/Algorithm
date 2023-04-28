@@ -42,45 +42,44 @@ vector<int> ans;
 
 void dfs(int root, int start)
 {
-    visited[start] = 1;
+   visited[start] = 1;
 
-    int next = arr[start];
+   int next = arr[start];
 
-    if (root == next)
-    {
-        ans.pb(root);
-        return;
-    }
+   if (root == next)
+   {
+      ans.pb(root);
+      return;
+   }
 
-    if (!visited[next])
-        dfs(root, next);
+   if (!visited[next])
+      dfs(root, next);
 }
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
-    int N;
+   int N;
 
-    scanf("%d", &N);
+   scanf("%d", &N);
 
-    rep1(i, N)
-    {
-        scanf("%d", &arr[i]);
-    }
+   rep1(i, N)
+   {
+      scanf("%d", &arr[i]);
+   }
 
-    rep1(i, N)
-    {
-        memset(visited, 0, sizeof(visited));
-        dfs(i, i);
-    }
+   rep1(i, N)
+   {
+      memset(visited, 0, sizeof(visited));
+      dfs(i, i);
+   }
 
-    printf("%d\n", ans.size());
+   printf("%d\n", ans.size());
 
-    rep(i, ans.size())
-    {
-        printf("%d\n", ans[i]);
-    }
+   rep(i, ans.size())
+   {
+      printf("%d\n", ans[i]);
+   }
 
-    return 0;
+   return 0;
 }

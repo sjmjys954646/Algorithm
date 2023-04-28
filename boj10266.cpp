@@ -79,8 +79,6 @@ void kmp()
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-
     int N;
     int tmp;
 

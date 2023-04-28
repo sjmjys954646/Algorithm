@@ -1,5 +1,5 @@
 //freopen("input.txt", "r", stdin);
-//6636kb 48ms
+//2288kb 12ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -39,8 +39,6 @@ vector<pair<ll, pair<ll, ll>>> q;
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-
     scanf("%lld %lld", &N, &H);
 
     rep(i, N)

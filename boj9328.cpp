@@ -118,7 +118,6 @@ void bfs()
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     int testcase;
 

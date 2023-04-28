@@ -77,7 +77,6 @@ int dfs(int here, bool isRoot)
 
 int main()
 {
-    //freopen("input.txt", "r", stdin);
 
     int cnt = 0;
 

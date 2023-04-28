@@ -26,7 +26,6 @@ int main()
 {
     memset(cache, -1, sizeof(cache));
 
-    freopen("input.txt", "r", stdin);
 
     cin >> S;
 

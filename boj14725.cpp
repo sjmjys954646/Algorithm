@@ -58,7 +58,6 @@ void dfs(Node *cur, int depth)
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     int N;
     cin >> N;

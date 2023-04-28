@@ -33,8 +33,6 @@ int N, M;
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-
     scanf("%d", &N);
 
     int left = 0;

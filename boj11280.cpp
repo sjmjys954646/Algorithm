@@ -38,84 +38,83 @@ const int INF = 987654321;
 
 int N, M;
 vector<int> arr[20002];
-bool finished[20002]; // sccê°€ ë§Œë“¤ì–´ë¬ëŠ”ì§€
+bool finished[20002]; // scc°¡ ¸¸µé¾î‰ç´ÂÁö
 stack<int> S;
 int num = 0;
 int sccN = 0;
-int visited[20002]; // ë°©ë¬¸ ë²ˆí˜¸
+int visited[20002]; // ¹æ¹® ¹øÈ£
 int scc[20002];
 bool check;
 
 int dfs(int start)
 {
-    visited[start] = ++num;
-    S.push(start);
-    int ret = visited[start];
+   visited[start] = ++num;
+   S.push(start);
+   int ret = visited[start];
 
-    for (int next : arr[start])
-    {
-        if (!visited[next])
-            ret = min(ret, dfs(next));
-        else if (!finished[next])
-            ret = min(ret, visited[next]);
-    }
+   for (int next : arr[start])
+   {
+      if (!visited[next])
+         ret = min(ret, dfs(next));
+      else if (!finished[next])
+         ret = min(ret, visited[next]);
+   }
 
-    if (ret == visited[start])
-    {
-        while (true)
-        {
-            int tmp = S.top();
-            S.pop();
-            scc[tmp] = sccN;
-            finished[tmp] = true;
-            if (tmp == start)
-                break;
-        }
-        sccN++;
-    }
+   if (ret == visited[start])
+   {
+      while (true)
+      {
+         int tmp = S.top();
+         S.pop();
+         scc[tmp] = sccN;
+         finished[tmp] = true;
+         if (tmp == start)
+            break;
+      }
+      sccN++;
+   }
 
-    return ret;
+   return ret;
 }
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-    memset(finished, 0, sizeof(finished));
-    memset(visited, 0, sizeof(visited));
+   memset(finished, 0, sizeof(finished));
+   memset(visited, 0, sizeof(visited));
 
-    scanf("%d %d", &N, &M);
+   scanf("%d %d", &N, &M);
 
-    for (int i = 0; i < M; i++)
-    {
-        int A, B;
-        scanf("%d %d", &A, &B);
+   for (int i = 0; i < M; i++)
+   {
+      int A, B;
+      scanf("%d %d", &A, &B);
 
-        A = (A < 0 ? -(A + 1) * 2 : A * 2 - 1);
-        // -2 -> 2, 2 -> 3, -3 -> 4 , 3 -> 5
-        B = (B < 0 ? -(B + 1) * 2 : B * 2 - 1);
+      A = (A < 0 ? -(A + 1) * 2 : A * 2 - 1);
+      // -2 -> 2, 2 -> 3, -3 -> 4 , 3 -> 5
+      B = (B < 0 ? -(B + 1) * 2 : B * 2 - 1);
 
-        arr[A % 2 ? A - 1 : A + 1].pb(B);
-        arr[B % 2 ? B - 1 : B + 1].pb(A);
-    }
+      arr[A % 2 ? A - 1 : A + 1].pb(B);
+      arr[B % 2 ? B - 1 : B + 1].pb(A);
+   }
 
-    rep(i, N * 2)
-    {
-        if (visited[i] == 0)
-            dfs(i);
-    }
+   rep(i, N * 2)
+   {
+      if (visited[i] == 0)
+         dfs(i);
+   }
 
-    for (int i = 0; i < N; i++)
-    {
-        if (scc[i * 2] == scc[i * 2 + 1])
-        {
-            check = true;
-        }
-    }
+   for (int i = 0; i < N; i++)
+   {
+      if (scc[i * 2] == scc[i * 2 + 1])
+      {
+         check = true;
+      }
+   }
 
-    if (check)
-        cout << 0;
-    else
-        cout << 1;
+   if (check)
+      cout << 0;
+   else
+      cout << 1;
 
-    return 0;
+   return 0;
 }

@@ -87,7 +87,6 @@ void roll(int order)
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     int tmp;
 

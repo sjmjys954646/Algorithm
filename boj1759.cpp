@@ -1,5 +1,5 @@
 //freopen("input.txt", "r", stdin);
-//2028kb 4ms
+//2016kb 4ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -119,7 +119,6 @@ void vowelSelect()
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     char tmp;
 

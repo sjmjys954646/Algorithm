@@ -72,7 +72,6 @@ int dfs(int here, int par)
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     int cnt = 0;
 

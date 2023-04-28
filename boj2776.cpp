@@ -1,5 +1,5 @@
 //freopen("input.txt", "r", stdin);
-//9832kb 780ms
+//2148kb 0ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -35,8 +35,6 @@ typedef vector<int> vi;
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-
     int testcase;
 
     scanf("%d", &testcase);

@@ -1,4 +1,4 @@
-//2024kb 12ms
+//6132kb 84ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -246,8 +246,6 @@ void select()
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-
     scanf("%d", &N);
 
     rep(i, N)

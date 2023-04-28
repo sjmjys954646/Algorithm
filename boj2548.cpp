@@ -42,47 +42,47 @@ int arr[10001];
 
 int main()
 {
-    cin >> N;
+   cin >> N;
 
-    rep(i, N)
-    {
-        int tmp;
-        cin >> tmp;
-        v.push_back(tmp);
-    }
+   rep(i, N)
+   {
+      int tmp;
+      cin >> tmp;
+      v.push_back(tmp);
+   }
 
-    if (N == 1)
-    {
-        cout << v[0];
-        return 0;
-    }
+   if (N == 1)
+   {
+      cout << v[0];
+      return 0;
+   }
 
-    sort(v.begin(), v.end());
+   sort(v.begin(), v.end());
 
-    for (int i = 1; i < 10001; i++)
-    {
+   for (int i = 1; i < 10001; i++)
+   {
 
-        int sum = 0;
-        for (int j = 0; j < N; j++)
-        {
-            sum += (abs(v[j] - i));
-        }
-        arr[i] = sum;
-        // cout << i << " " << sum << "\n";
-    }
+      int sum = 0;
+      for (int j = 0; j < N; j++)
+      {
+         sum += (abs(v[j] - i));
+      }
+      arr[i] = sum;
+      // cout << i << " " << sum << "\n";
+   }
 
-    int maxi = INF;
-    int ans;
-    for (int i = 1; i < 10001; i++)
-    {
-        if (maxi > arr[i])
-        {
-            ans = i;
-            maxi = arr[i];
-        }
-    }
+   int maxi = INF;
+   int ans;
+   for (int i = 1; i < 10001; i++)
+   {
+      if (maxi > arr[i])
+      {
+         ans = i;
+         maxi = arr[i];
+      }
+   }
 
-    cout << ans;
+   cout << ans;
 
-    return 0;
+   return 0;
 }

@@ -57,7 +57,6 @@ void Star(int num, int a, int b)
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     int a, b, c, d, num, l;
     int k = 0;

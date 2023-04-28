@@ -1,5 +1,5 @@
 //freopen("input.txt", "r", stdin);
-//2052kb 24ms
+//2028kb 4ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -86,8 +86,6 @@ int dfsstart()
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-
     int ans = -1;
 
     scanf("%d", &N);

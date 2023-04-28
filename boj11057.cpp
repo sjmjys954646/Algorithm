@@ -19,8 +19,6 @@ long long cache[1003][10];
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-
     memset(cache, 0, sizeof(cache));
     int N;
     long long ans = 0;

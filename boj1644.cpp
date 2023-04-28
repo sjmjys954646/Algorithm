@@ -1,79 +1,71 @@
-//6132kb 84ms
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
-#include <string>
+#include <string.h>
 #include <cmath>
 #include <algorithm>
 #include <vector>
-#include <utility>
-#include <string>
-#include <queue>
-#include <stack>
-#include <cstring>
-#include <list>
-#include <set>
-
-#define rep(i, n) for (int i = 0; i < (int)(n); ++i)
-#define rep1(i, n) for (int i = 1; i <= (int)(n); ++i)
-#define range(x) begin(x), end(x)
-#define sz(x) (int)(x).size()
-#define pb push_back
-#define F first
-#define S second
-
 using namespace std;
 
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double ld;
-typedef pair<int, int> pii;
-typedef vector<int> vi;
+bool isPrime[4000001];
+vector<int> prime;
+int num;
 
-int arr[100002];
-int N, SS;
+void eratos()
+{
+   memset(isPrime, 1, sizeof(isPrime));
+   isPrime[0] = isPrime[1] = false;
+   int N = int(sqrt(4000001));
+
+   for (int i = 2; i <= N; i++)
+   {
+      if (isPrime[i])
+      {
+         for (int j = i * i; j < 4000001; j += i)
+         {
+            isPrime[j] = false;
+         }
+      }
+   }
+}
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
+   scanf("%d", &num);
 
-    scanf("%d %d", &N, &SS);
+   eratos();
 
-    for (int i = 0; i < N; i++)
-    {
-        scanf("%d", &arr[i]);
-    }
+   for (int i = 0; i < 4000001; i++)
+   {
+      if (isPrime[i] == true)
+      {
+         prime.push_back(i);
+      }
+   }
+   int t = prime.size();
+   int sum = 0;
+   int left = 0;
+   int right = 0;
+   int ans = 0;
+   while (true)
+   {
+      if (sum >= num)
+      {
+         sum -= prime[left];
+         left++;
+      }
+      else
+      {
+         if (right == t)
+            break;
+         sum += prime[right];
+         right++;
+      }
 
-    int left = 0;
-    int right = 0;
-    int sum = arr[0];
-    int ans = 987654321;
+      if (sum == num)
+         ans++;
+   }
 
-    while (right < N)
-    {
-        if (sum > SS)
-        {
-            ans = min(ans, right - left + 1);
+   cout << ans;
 
-            sum -= arr[left];
-            left++;
-        }
-        else if (sum < SS)
-        {
-            right++;
-            sum += arr[right];
-        }
-        else
-        {
-            ans = min(ans, right - left + 1);
-            right++;
-            sum += arr[right];
-        }
-    }
-
-    if (ans == 987654321)
-        printf("0");
-    else
-        printf("%d", ans);
-    return 0;
+   return 0;
 }

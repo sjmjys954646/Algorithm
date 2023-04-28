@@ -1,122 +1,93 @@
-//freopen("input.txt", "r", stdin);
-//4228kb 36ms
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <stdio.h>
-#include <string>
-#include <cmath>
 #include <algorithm>
 #include <vector>
-#include <utility>
 #include <string>
-#include <queue>
-#include <stack>
+#include <functional>
 #include <cstring>
-#include <list>
-#include <set>
-#include <string.h>
-#include <map>
-#include <limits.h>
-#include <stdlib.h>
-
-#define rep(i, n) for (int i = 0; i < (int)(n); ++i)
-#define rep1(i, n) for (int i = 1; i <= (int)(n); ++i)
-#define range(x) begin(x), end(x)
-#define sz(x) (int)(x).size()
-#define pb push_back
-#define F first
-#define S second
+#include <stack>
+#include <queue>
 
 using namespace std;
 
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double ld;
-typedef pair<int, int> pii;
-typedef vector<int> vi;
-
 const int INF = 987654321;
-
 int N, M;
-vector<pii> graph[1001];
-int par[1001];
-int dist[1001];
-bool visited[1001][1001];
-int a, b, c;
+vector<pair<int,int> > graph[1001];
+vector<int> dist;
+int start,fin;
+int before[1001];
 
-void dijkstra(int start)
+void Dijkstra()
 {
+  priority_queue<pair<int,int> > pq;
+  pq.push({start,0});
+  dist[start] = 0;
+  before[start] = -1;
 
-    priority_queue<pii> pq;
+  while(!pq.empty())
+  {
+    int cur = pq.top().first;
+    int cost = pq.top().second;
 
-    pq.push({0, start});
-    dist[start] = 0;
-    par[start] = 0;
+    pq.pop();
 
-    while (!pq.empty())
+    if(dist[cur] < cost)
+      continue;
+
+    for(auto k : graph[cur])
     {
-        int cost = -pq.top().F;
-        int cur = pq.top().S;
+      int next = k.first;
+      int nextcost = k.second + cost;
 
-        pq.pop();
-
-        for (int i = 0; i < graph[cur].size(); i++)
-        {
-            int next = graph[cur][i].first;
-
-            if (dist[next] > cost + graph[cur][i].second)
-            {
-                dist[next] = cost + graph[cur][i].second;
-                pq.push({-dist[next], next});
-                par[next] = cur;
-            }
-        }
+      if(dist[next] > nextcost)
+      {
+        dist[next] = nextcost;
+        pq.push({next,nextcost});
+        before[next] = cur;
+      }
     }
+  }
 }
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
-    vector<pii> ansvec;
+  ios_base::sync_with_stdio(0);
+  cin.tie(0);
 
-    scanf("%d", &N);
-    scanf("%d", &M);
+  cin >> N >> M;
 
-    rep1(i, N)
-    {
-        dist[i] = INF;
-    }
+  for(int i =0;i<M;i++)
+  {
+    int w1, w2, cost;
+    cin >> w1 >> w2 >> cost;
+    graph[w1].push_back({w2,cost});
+  }
+  dist.resize(N+1);
 
-    rep(i, M)
-    {
-        scanf("%d %d %d", &a, &b, &c);
-        graph[a].pb({b, c});
-    }
+  cin>>start>>fin;
 
-    scanf("%d %d", &a, &b);
+	fill(dist.begin(), dist.end(), INF);
+  Dijkstra();
 
-    dijkstra(a);
+  cout<<dist[fin]<<"\n";;
+ 
+  int t = fin;
+  stack<int> s;
 
-    int tmp = b;
-    while (tmp != a)
-    {
-        if (!visited[tmp][par[tmp]])
-        {
-            visited[tmp][par[tmp]] = true;
-            ansvec.push_back({tmp, par[tmp]});
-        }
-        tmp = par[tmp];
-    }
+  while(t>=0)
+  {  
+    s.push(t);
+    t = before[t];
+  }
 
-    printf("%d\n", dist[b]);
+  cout<<s.size()<<"\n";
 
-    printf("%d\n", ansvec.size() + 1);
+  while(!s.empty())
+  {
+    int p = s.top();
+    cout<<p<<" ";
+    s.pop();
+  }
 
-    printf("%d ", a);
-    for (int i = ansvec.size() - 1; i >= 0; i--)
-    {
-        printf("%d ", ansvec[i].F);
-    }
 
-    return 0;
+	return 0;
 }

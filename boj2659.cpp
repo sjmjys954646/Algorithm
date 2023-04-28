@@ -43,72 +43,71 @@ int ans = 1;
 
 void makeArr(int dep)
 {
-    if (dep == 4)
-    {
-        rep(i, 4)
-        {
-            int idx = i;
-            int cnt = 0;
-            int sum = 0;
-            while (cnt < 4)
-            {
-                sum += arr[idx] * pow(10, 3 - cnt);
-                idx++;
-                cnt++;
-                if (idx == 4)
-                    idx = 0;
-            }
-            tarr[i] = sum;
-        }
-        sort(tarr, tarr + 4);
+   if (dep == 4)
+   {
+      rep(i, 4)
+      {
+         int idx = i;
+         int cnt = 0;
+         int sum = 0;
+         while (cnt < 4)
+         {
+            sum += arr[idx] * pow(10, 3 - cnt);
+            idx++;
+            cnt++;
+            if (idx == 4)
+               idx = 0;
+         }
+         tarr[i] = sum;
+      }
+      sort(tarr, tarr + 4);
 
-        barr[arr[0] * 1000 + arr[1] * 100 + arr[2] * 10 + arr[3]] = tarr[0];
+      barr[arr[0] * 1000 + arr[1] * 100 + arr[2] * 10 + arr[3]] = tarr[0];
 
-        return;
-    }
+      return;
+   }
 
-    for (int i = 1; i < 10; i++)
-    {
-        arr[dep] = i;
-        makeArr(dep + 1);
-    }
+   for (int i = 1; i < 10; i++)
+   {
+      arr[dep] = i;
+      makeArr(dep + 1);
+   }
 }
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
-    for (int i = 0; i < 10000; i++)
-    {
-        barr[i] = INF;
-    }
+   for (int i = 0; i < 10000; i++)
+   {
+      barr[i] = INF;
+   }
 
-    makeArr(0);
-    int tmp = 0;
-    int ans = 0;
+   makeArr(0);
+   int tmp = 0;
+   int ans = 0;
 
-    rep(i, 4)
-    {
-        scanf("%d", &arr[i]);
-        tmp += arr[i] * pow(10, 3 - i);
-    }
+   rep(i, 4)
+   {
+      scanf("%d", &arr[i]);
+      tmp += arr[i] * pow(10, 3 - i);
+   }
 
-    tmp = barr[tmp];
+   tmp = barr[tmp];
 
-    sort(barr, barr + 10000);
+   sort(barr, barr + 10000);
 
-    for (int i = 0; i < 10000; i++)
-    {
-        if (i != 0 && barr[i] == barr[i - 1])
-            continue;
-        ans++;
-        if (barr[i] == tmp)
-        {
-            break;
-        }
-    }
+   for (int i = 0; i < 10000; i++)
+   {
+      if (i != 0 && barr[i] == barr[i - 1])
+         continue;
+      ans++;
+      if (barr[i] == tmp)
+      {
+         break;
+      }
+   }
 
-    printf("%d", ans);
+   printf("%d", ans);
 
-    return 0;
+   return 0;
 }

@@ -1,4 +1,3 @@
-#메모리 : 29076 KB 시간 : 984ms
 s = input()
 p = input()
 slen = len(s)

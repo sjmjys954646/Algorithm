@@ -42,7 +42,6 @@ vector<ll> vec;
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     int N;
     ll tmp;

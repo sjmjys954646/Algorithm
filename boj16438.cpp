@@ -56,7 +56,6 @@ void day(vi v, int start, int end, int depth)
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
 
     scanf("%d", &N);
 

@@ -1,4 +1,3 @@
-//2408kb 36ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string>
@@ -20,30 +19,30 @@ int maxhi;
 
 int main()
 {
-    fill(cache, cache + 100002, INF);
+	fill(cache, cache + 100002, INF);
 
-    scanf("%d", &N);
+	scanf("%d", &N);
 
-    maxhi = (int)floor(sqrt(100000));
+	maxhi = (int)floor(sqrt(100000));
 
-    for (int i = 1; i <= maxhi; i++)
-    {
-        cache[i * i] = 1;
-    }
+	for (int i = 1; i <= maxhi; i++)
+	{
+		cache[i * i] = 1;
+	}
 
-    for (int i = 2; i < 100001; i++)
-    {
-        for (int j = maxhi; j >= 1; j--)
-        {
-            if (j * j > i)
-                continue;
+	for (int i = 2; i < 100001; i++)
+	{
+		for (int j = maxhi; j >= 1; j--)
+		{
+			if (j*j > i)
+				continue;
 
-            if (cache[i] > cache[i - j * j] + 1)
-                cache[i] = cache[i - j * j] + 1;
-        }
-    }
+			if( cache[i] > cache[i-j*j] + 1)
+				cache[i] = cache[i - j * j] + 1;
+		}
+	}
 
-    printf("%d", cache[N]);
-
-    return 0;
+	printf("%d", cache[N]);
+	
+	return 0;
 }

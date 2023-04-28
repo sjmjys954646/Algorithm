@@ -14,7 +14,7 @@
 using namespace std;
 
 int N, Q;
-vector<pair<int, long long> > arr[5002];
+vector<pair<int,long long> > arr[5002];
 bool visited[5002];
 int K, U;
 queue<int> q;
@@ -54,7 +54,7 @@ int main()
     cout.tie(NULL);
 
     cin >> N >> Q;
-
+    
     for (int i = 1; i < N; i++)
     {
         int a, b;
@@ -75,7 +75,7 @@ int main()
         q.push(U);
         BFS();
 
-        cout << ans << "\n";
+        cout << ans<<"\n";
     }
 
     return 0;

@@ -39,11 +39,11 @@ const int INF = 987654321;
 
 int V, E;
 vector<int> arr[10002];
-bool finished[10002]; // sccê°€ ë§Œë“¤ì–´ë¬ëŠ”ì§€
+bool finished[10002]; // scc°¡ ¸¸µé¾î‰ç´ÂÁö
 stack<int> S;
 int num = 0;
 int sccN = 0;
-int visited[10002]; // ë°©ë¬¸ ë²ˆí˜¸
+int visited[10002]; // ¹æ¹® ¹øÈ£
 vector<int> scc[10002];
 
 int dfs(int start)
@@ -80,7 +80,6 @@ int dfs(int start)
 
 int main()
 {
-    freopen("input.txt", "r", stdin);
     memset(finished, 0, sizeof(finished));
     memset(visited, 0, sizeof(visited));
 

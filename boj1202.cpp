@@ -1,4 +1,4 @@
-ï»¿//5648kb 0ms
+//5648kb 0ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -43,7 +43,7 @@ int main()
     {
         int M, V;
         scanf("%d %d", &M, &V);
-        pq.push({ V,M });//ê°€ì¹˜  ë¬´ê²Œ
+        pq.push({ V,M });//°¡Ä¡  ¹«°Ô
     }
 
     rep(i, K)

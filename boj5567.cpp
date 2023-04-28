@@ -1,4 +1,3 @@
-//5648kb 0ms
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -30,7 +29,7 @@ typedef vector<int> vi;
 
 int N, M;
 vector<vi> graph;
-W bool visit[503];
+bool visit[503];
 int ans = 0;
 
 void bfs()
@@ -63,7 +62,6 @@ void bfs()
 int main()
 {
     memset(visit, 0, sizeof(visit));
-    freopen("input.txt", "r", stdin);
 
     graph.resize(503);
 

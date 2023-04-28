@@ -1,4 +1,4 @@
-﻿// freopen("input.txt", "r", stdin);
+// freopen("input.txt", "r", stdin);
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <stdio.h>
@@ -41,7 +41,7 @@ const int INF = 987654321;
 
 int c[202][402];
 int f[202][402];
-int d[202];
+int d[1002];
 int a[1002];
 int b[1002];
 vector<int> arr[1002];
@@ -146,9 +146,12 @@ int main()
 		if (a[i] != -1)
 			continue;
 
-		fill(d, d + 1002, 0);
-		if (dfs(i))
-			cnt++;
+		for (int j = 0; j < 2; j++)
+		{
+			fill(d, d + 1002, 0);
+			if (dfs(i))
+				cnt++;
+		}
 	}
 
 	cout << cnt;

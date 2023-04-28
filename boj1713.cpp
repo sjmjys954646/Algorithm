@@ -52,7 +52,7 @@ int main()
 
    cin >> num >> order;
 
-   vector<pair<int, int>> tul; //ì˜¤ë˜ë¬ëŠ”ì§€ ì´ë¦„
+   vector<pair<int, int>> tul; //¿À·¡‰ç´ÂÁö ÀÌ¸§
 
    for (int second = 0; second < order; second++)
    {
